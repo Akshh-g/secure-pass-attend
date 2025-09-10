@@ -1,12 +1,37 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { GraduationCap, Shield, Users, CheckCircle } from 'lucide-react';
+import LoginForm from '@/components/LoginForm';
+import AdminDashboard from '@/components/AdminDashboard';
+import TeacherDashboard from '@/components/TeacherDashboard';
+import StudentDashboard from '@/components/StudentDashboard';
+
+type UserRole = 'admin' | 'teacher' | 'student' | null;
 
 const Index = () => {
+  const [currentUser, setCurrentUser] = useState<UserRole>(null);
+
+  const handleLogin = (role: UserRole) => {
+    setCurrentUser(role);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+  };
+
+  if (!currentUser) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {currentUser === 'admin' && <AdminDashboard onLogout={handleLogout} />}
+      {currentUser === 'teacher' && <TeacherDashboard onLogout={handleLogout} />}
+      {currentUser === 'student' && <StudentDashboard onLogout={handleLogout} />}
     </div>
   );
 };
