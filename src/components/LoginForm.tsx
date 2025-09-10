@@ -45,12 +45,12 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="max-w-6xl w-full">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-6">
-            <div className="bg-gradient-to-r from-primary to-blue-600 p-4 rounded-full">
+            <div className="bg-primary p-4 rounded-full">
               <GraduationCap className="h-12 w-12 text-white" />
             </div>
           </div>
@@ -77,11 +77,11 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
                 <CardHeader className="text-center">
                   <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4 ${
                     selectedRole === role 
-                      ? 'bg-gradient-to-r from-primary to-blue-600' 
-                      : 'bg-gradient-to-r from-gray-100 to-gray-200'
+                      ? 'bg-primary' 
+                      : 'bg-muted'
                   }`}>
                     <Icon className={`h-8 w-8 ${
-                      selectedRole === role ? 'text-white' : 'text-gray-600'
+                      selectedRole === role ? 'text-primary-foreground' : 'text-muted-foreground'
                     }`} />
                   </div>
                   <CardTitle className="text-xl">{config.title}</CardTitle>
@@ -136,7 +136,7 @@ const LoginForm = ({ onLogin }: LoginFormProps) => {
               </div>
               <Button 
                 type="submit" 
-                className="w-full bg-gradient-to-r from-primary to-blue-600 hover:from-blue-600 hover:to-primary"
+                className="w-full"
                 disabled={!selectedRole}
               >
                 Sign In as {selectedRole ? roleFeatures[selectedRole as keyof typeof roleFeatures].title : 'User'}
